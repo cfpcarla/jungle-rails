@@ -1,0 +1,18 @@
+<tr>
+  <td>
+    <%= image_tag product.image.tiny %>
+  </td>
+  <td>
+    <h4><%= product.name %></h4>
+    <br>
+    <p><%= product.description %></p>
+  </td>
+  <td>
+    <%= product.price.format(:no_cents_if_whole => false, :symbol => true) %>
+  </td>
+  <td>
+    <%= quantity %>
+  <td>
+    <%=humanized_money_with_symbol product.price* quantity %>
+  </td>
+</tr>
