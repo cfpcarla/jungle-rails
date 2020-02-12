@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_user
+    if session[:user_id]
+      User.find(session[:user_id])
+    end
+  end
+  helper_method :current_user
+
   def cart
     @cart ||= cookies[:cart].present? ? JSON.parse(cookies[:cart]) : {}
   end
@@ -23,10 +30,9 @@ class ApplicationController < ActionController::Base
 
   def update_cart(new_cart)
     cookies[:cart] = {
-      value: JSON.generate(new_cart),
-      expires: 10.days.from_now
-    }
-    cookies[:cart]
-  end
-
+    value: JSON.generate(new_cart),
+    expires: 10.days.from_now
+  }
+  cookies[:cart]
+end
 end
